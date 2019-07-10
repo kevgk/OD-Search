@@ -37,4 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   searchButton.addEventListener('click', search);
+  
+  document.addEventListener('keyup', e => {
+    if (e.which == 13) search();
+  });
 });

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="popup.css"/>
+    </head>
+    <body>
+        <input type="text" class="search__input" id="searchTermInput" placeholder="Search..."/>
+        <button id="searchButton" class="search__button">⯈</button>
+        <select id="searchTypeSelect" class="typeSelection">
+            <option value="0">Video (avi|mkv|mov|mp4|mpg|wmv)</option>
+            <option value="1">Audio (ac3|flac|m4a|mp3|ogg|wav|wma)</option>
+            <option value="2">Documents (CBZ|CBR|CHM|DOC|DOCX|EPUB|MOBI|ODT|PDF|RTF|txt)</option>
+            <option value="3">Pictures (bmp|gif|jpg|jpeg|png|psd|tif|tiff)</option>
+            <option value="4">Applications (apk|exe)</option>
+            <option value="5">Archives (iso|rar|tar|zip|7z)</option>
+        </select>
+        <div class="exclude">
+            <input id="excludeWordsInput" type="text" placeholder="Exclude words..."/>
+            <input id="excludeSitesInput" type="text" placeholder="Exclude sites..."/> 
+        </div>
+        <a href="https://github.com/kevgk/OD-Search">OpenSource (Github)</a>
+        <script src="background.js"></script>
+    </body>
+</html>

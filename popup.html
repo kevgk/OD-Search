@@ -5,21 +5,22 @@
         <link rel="stylesheet" href="popup.css"/>
     </head>
     <body>
-        <input type="text" class="search__input" id="searchTermInput" placeholder="Search..."/>
+        <input type="text" autofocus class="search__input" id="searchTermInput" placeholder="Search..."/>
         <button id="searchButton" class="search__button">⯈</button>
-        <select id="searchTypeSelect" class="typeSelection">
-            <option value="0">Video (avi|mkv|mov|mp4|mpg|wmv)</option>
-            <option value="1">Audio (ac3|flac|m4a|mp3|ogg|wav|wma)</option>
-            <option value="2">Documents (CBZ|CBR|CHM|DOC|DOCX|EPUB|MOBI|ODT|PDF|RTF|txt)</option>
-            <option value="3">Pictures (bmp|gif|jpg|jpeg|png|psd|tif|tiff)</option>
-            <option value="4">Applications (apk|exe)</option>
-            <option value="5">Archives (iso|rar|tar|zip|7z)</option>
+        <select value="0" id="searchTypeSelect" class="search__select"></select>
+        <select value="0" id="searchTimeSelect" class="search__select">
+            <option value="0">all time</option>
+            <option value="1">last hour</option>
+            <option value="2">last 24 hours</option>
+            <option value="3">last week</option>
+            <option value="4">last month</option>
+            <option value="5">last year</option>
         </select>
-        <div class="exclude">
+        <div class="search__exclude">
             <input id="excludeWordsInput" type="text" placeholder="Exclude words..."/>
             <input id="excludeSitesInput" type="text" placeholder="Exclude sites..."/> 
         </div>
-        <a href="https://github.com/kevgk/OD-Search">OpenSource (Github)</a>
+        <a href="https://github.com/kevgk/OD-Search" class="openSourceLink">OpenSource (Github)</a>
         <script src="background.js"></script>
     </body>
 </html>

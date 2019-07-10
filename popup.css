@@ -35,23 +35,20 @@ input, select, button {
     text-align: center;
 }
 
-.exclude > input {
+.search__exclude > input {
     width: 100%;
 }
 
-.typeSelection {
+.search__select {
     width: 100%;
 }
 
-a {
+.openSourceLink {
     width: 100%;
     text-align: center;
-    background-color: #cfcfcf;
-    border-radius: 4px;
     display: block;
-    font-size: 12px;
+    font-size: 10px;
     text-decoration: none;
-    padding: 5px;
     font-family: sans-serif;
     color: #000;
 }

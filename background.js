@@ -1,44 +1,71 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+
+  const presets = await loadPresets();
+
   const searchTermInput = document.querySelector('#searchTermInput');
   const searchButton = document.querySelector('#searchButton');
   const searchTypeSelect = document.querySelector('#searchTypeSelect');
+  const searchTimeSelect = document.querySelector('#searchTimeSelect');
 
   const excludeWordsInput = document.querySelector('#excludeWordsInput');
   const excludeSitesInput = document.querySelector('#excludeSitesInput');
   
-  const commons = `
-    -inurl:(jsp|pl|php|html|aspx|htm|cf|shtml)
-    -inurl:(index_of|listen77|mp3raid|mp3toss|mp3drug|index_of|wallywashis)
-    intitle:\"index.of./\"
-  `;
+  searchTypeSelect.innerHTML = presets.map(({ id, title, hidden }) => {
+    if (!hidden) return `<option value="${id}">${title}</option>`;
+  });
 
-  const extensions = [
-    '(avi|mkv|mov|mp4|mpg|wmv)',
-    '(ac3|flac|m4a|mp3|ogg|wav|wma)',
-    '(CBZ|CBR|CHM|DOC|DOCX|EPUB|MOBI|ODT|PDF|RTF|txt)',
-    '(bmp|gif|jpg|jpeg|png|psd|tif|tiff)',
-    '(apk|exe)',
-    '(iso|rar|tar|zip|7z)'
-  ];
+  function getIncludes (original) {
+    let output = [];
+
+    function recursion (package) {
+      if (package.content) output.push(package.content.join(' '));
+      if (package.include) {
+        return package.include.forEach(str => {
+          let c = presets.find(obj => obj.name === str);
+          if (c.content) output.push(c.content.join(' '));
+          recursion(c.id)
+        });
+      }
+    }
+
+    recursion(original);
+    return output.join(' ');
+  }
+
+  searchButton.addEventListener('click', search);
+  
+  document.addEventListener('keyup', e => {
+    if (e.which === 13) search();
+  });
 
   function search() {
-    const searchTerms = searchTermInput.value.split(',').map(term => `intext:"${term.trim()}"`).join(' ');
+    if (!searchTermInput.value) return;
+
+    const preset = presets[searchTypeSelect.value];
+    const includes = getIncludes(preset);
+    const { prepend = '', append = '' } = preset.searchTerm || {};
+    const searchTerms = searchTermInput.value.split(',').map(term => `${prepend}${term.trim()}${append}`).join(' ');
     const excludeWords = excludeWordsInput.value.split(',').map(word => `-intext:"${word}"`).join(' ') || '';
     const excludeSites = excludeSitesInput.value.split(',').map(site => `-site:"${site}"`).join(' ') || '';
+    const timeParam = getTimeParameter(searchTimeSelect.value);
 
-    const finalquery = `${searchTerms} ${extensions[searchTypeSelect.value]} ${commons} ${excludeWords} ${excludeSites}`;
+    const searchQuery = `${searchTerms} ${includes} ${excludeWords} ${excludeSites}`;
 
-    const url = `https://www.google.com/search?q=${encodeURIComponent(finalquery)}`;
-    
+    const url = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}${timeParam}`;
+
     browser.tabs.create({
       url,
       active: true
     });
   }
 
-  searchButton.addEventListener('click', search);
-  
-  document.addEventListener('keyup', e => {
-    if (e.which == 13) search();
-  });
+  async function loadPresets () {
+    const data = await fetch('/presets.json');
+    return await data.json();
+  }
+
+  function getTimeParameter (value) {
+    const timeParams = ['', 'h', 'd', 'w', 'm', 'y'];
+    return value ? `&tbs=qdr:${timeParams[value]}` : '';
+  }
 });

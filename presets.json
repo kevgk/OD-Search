@@ -1,0 +1,154 @@
+[
+  {
+    "id": 0,
+    "name": "videoFormats",
+    "content": ["(avi|mkv|mov|mp4|mpg|wmv)"],
+    "hidden": true
+  },
+  {
+    "name": "audioFormats",
+    "id": 1,
+    "content": ["(ac3|flac|m4a|mp3|ogg|wav|wma)"],
+    "hidden": true
+  },
+  {
+    "id": 2,
+    "name": "documentFormats",
+    "content": ["(CBZ|CBR|CHM|DOC|DOCX|EPUB|MOBI|ODT|PDF|RTF|txt)"],
+    "hidden": true
+  },
+  {
+    "id": 3,
+    "name": "imageFormats",
+    "content": ["(bmp|gif|jpg|jpeg|png|psd|tif|tiff)"],
+    "hidden": true
+  },
+  {
+    "id": 4,
+    "name": "executableFormats",
+    "content": ["(exe|apk)"],
+    "hidden": true
+  },
+  {
+    "id": 5,
+    "name": "archiveFormats",
+    "content": ["(iso|rar|tar|zip|7z)"],
+    "hidden": true
+  },
+  {
+    "id": 6,
+    "name": "gdrive_videos",
+    "title": "Google Drive Videos",
+    "content": ["site:drive.google.com"],
+    "include": ["videoFormats"]
+  },
+  {
+    "id": 7,
+    "name": "gdrive_audio",
+    "title": "Google Drive Audio",
+    "content": ["site:drive.google.com"],
+    "include": ["audioFormats"]
+  },
+  {
+    "id": 8,
+    "name": "gdrive_documents",
+    "title": "Google Drive Documents",
+    "content": ["site:drive.google.com"],
+    "include": ["documentFormats"]
+  },
+  {
+    "id": 9,
+    "name": "gdrive_archives",
+    "title": "Google Drive Archives",
+    "content": ["site:drive.google.com"],
+    "include": ["archiveFormats"]
+  },
+  {
+    "id": 10,
+    "name": "videos",
+    "title": "Videos",
+    "searchTerm": {
+      "prepend": "\"intext:",
+      "append": "\""
+    },
+    "include": ["videoFormats", "commons"],
+    "hidden": false
+  },
+  {
+    "id": 11,
+    "name": "images",
+    "title": "Images",
+    "searchTerm": {
+      "prepend": "\"intext:",
+      "append": "\""
+    },
+    "include": ["imageFormats", "commons"],
+    "hidden": false
+  },
+  {
+    "id": 12,
+    "name": "audio",
+    "title": "Audio",
+    "searchTerm": {
+      "prepend": "\"intext:",
+      "append": "\""
+    },
+    "include": ["audioFormats", "commons"],
+    "hidden": false
+  },
+  {
+    "id": 13,
+    "name": "documents",
+    "title": "Documents",
+    "searchTerm": {
+      "prepend": "\"intext:",
+      "append": "\""
+    },
+    "include": ["documentFormats", "commons"],
+    "hidden": false
+  },
+  {
+    "id": 14,
+    "name": "executables",
+    "title": "Executables",
+    "searchTerm": {
+      "prepend": "\"intext:",
+      "append": "\""
+    },
+    "include": ["executableFormats", "commons"],
+    "hidden": false
+  },
+  {
+    "id": 15,
+    "name": "archives",
+    "title": "Archives",
+    "searchTerm": {
+      "prepend": "\"intext:",
+      "append": "\""
+    },
+    "include": ["archiveFormats", "commons"],
+    "hidden": false
+  },
+  {
+    "id": 16,
+    "name": "commons",
+    "content": [
+      "-inurl:(jsp|pl|php|html|aspx|htm|cf|shtml)",
+      "-inurl:(index_of|listen77|mp3raid|mp3toss|mp3drug|index_of|wallywashis)",
+      "intitle:\"index.of.\""
+    ],
+    "hidden": true
+  },
+  {
+    "id": 17,
+    "name": "indexof",
+    "title": "index of",
+    "content": [
+      "intitle:\"index.of.\"",
+      "allintitle:\"index of\"",
+      "\"index of /pub\"",
+      "parent directory"
+    ],
+    "hidden": false
+  }
+]

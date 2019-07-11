@@ -1,11 +1,22 @@
 {
   "manifest_version": 2,
   "name": "OD-Search",
-  "version": "1.0",
+  "version": "1.1",
   "description": "Firefox Extension that builds Google search queries for open directories.",
   "browser_action": {
     "default_title": "OD-Search",
     "default_icon": "magnify.png",
     "default_popup": "popup.html"
+  },
+  "options_ui": {
+    "page": "options.html"
+  },
+
+  "permissions": ["storage"],
+
+  "applications": {
+    "gecko": {
+      "id": "ODSearch@kevgk"
+    }
   }
 }

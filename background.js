@@ -10,26 +10,17 @@ document.addEventListener('DOMContentLoaded', async () => {
   const excludeWordsInput = document.querySelector('#excludeWordsInput');
   const excludeSitesInput = document.querySelector('#excludeSitesInput');
   
-  searchTypeSelect.innerHTML = presets.map(({ id, title, hidden }) => {
-    if (!hidden) return `<option value="${id}">${title}</option>`;
+  searchTypeSelect.innerHTML = Object.keys(presets).map(key => {
+    const { hidden, title } = presets[key];
+    if (!hidden) return `<option value="${key}">${title}</option>`;
   });
 
-  function getIncludes (original) {
-    let output = [];
-
-    function recursion (package) {
-      if (package.content) output.push(package.content.join(' '));
-      if (package.include) {
-        return package.include.forEach(str => {
-          let c = presets.find(obj => obj.name === str);
-          if (c.content) output.push(c.content.join(' '));
-          recursion(c.id)
-        });
-      }
-    }
-
-    recursion(original);
-    return output.join(' ');
+  function getIncludes(original) {
+    if (!presets[original]) return [];
+    return [].concat(presets[original].include || []).reduce(
+      (r, name) => [...r, ...getIncludes(name)],
+      [original]
+    );
   }
 
   searchButton.addEventListener('click', search);
@@ -41,8 +32,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   function search() {
     if (!searchTermInput.value) return;
 
-    const preset = presets[searchTypeSelect.value];
-    const includes = getIncludes(preset);
+    const preset = searchTypeSelect.value;
+    const includeNames = getIncludes(preset);
+    const includes = includeNames.map(inc => presets[inc].content.join(' ')).join(' ');
+
     const { prepend = '', append = '' } = preset.searchTerm || {};
     const searchTerms = searchTermInput.value.split(',').map(term => `${prepend}${term.trim()}${append}`).join(' ');
     const excludeWords = excludeWordsInput.value.split(',').map(word => `-intext:"${word}"`).join(' ') || '';
@@ -60,8 +53,17 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   async function loadPresets () {
-    const data = await fetch('/presets.json');
-    return await data.json();
+    let { presets } = await browser.storage.sync.get("presets");
+
+    if (!presets) {
+      const data = await fetch('/presets.json');
+      presets = await data.json();
+
+      await browser.storage.sync.set({
+        presets
+      });
+    }
+    return presets;
   }
 
   function getTimeParameter (value) {

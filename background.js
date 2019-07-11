@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const searchButton = document.querySelector('#searchButton');
   const searchTypeSelect = document.querySelector('#searchTypeSelect');
   const searchTimeSelect = document.querySelector('#searchTimeSelect');
+  const searchEngineSelect = document.querySelector('#searchEngineSelect');
 
   const excludeWordsInput = document.querySelector('#excludeWordsInput');
   const excludeSitesInput = document.querySelector('#excludeSitesInput');
@@ -36,6 +37,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     const includeNames = getIncludes(preset);
     const includes = includeNames.map(inc => presets[inc].content.join(' ')).join(' ');
 
+    const searchEngines = [
+      'www.google.com/search?q=',
+      'www.duckduckgo.com/?q=',
+      'www.startpage.com/do/search?query='
+    ];
+
     const { prepend = '', append = '' } = preset.searchTerm || {};
     const searchTerms = searchTermInput.value.split(',').map(term => `${prepend}${term.trim()}${append}`).join(' ');
     const excludeWords = excludeWordsInput.value.split(',').map(word => `-intext:"${word}"`).join(' ') || '';
@@ -44,7 +51,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const searchQuery = `${searchTerms} ${includes} ${excludeWords} ${excludeSites}`;
 
-    const url = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}${timeParam}`;
+    const url = `https:${searchEngines[searchEngineSelect.value]}${encodeURIComponent(searchQuery)}${timeParam}`;
 
     browser.tabs.create({
       url,

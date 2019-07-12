@@ -50,8 +50,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const { prepend = '', append = '' } = preset.searchTerm || {};
     const searchTerms = searchTermInput.value.split(',').map(term => `${prepend}${term.trim()}${append}`).join(' ');
-    const excludeWords = excludeWordsInput.value.split(',').map(word => `-intext:"${word}"`).join(' ') || '';
-    const excludeSites = excludeSitesInput.value.split(',').map(site => `-site:"${site}"`).join(' ') || '';
+    const excludeWords = excludeWordsInput.value.length > 0 ? excludeWordsInput.value.split(',').map(word => `-intext:"${word}"`).join(' ') : '';
+    const excludeSites = excludeSitesInput.value.length > 0 ? excludeSitesInput.value.split(',').map(site => `-site:"${site}"`).join(' ') : '';
     const timeParam = getTimeParameter(searchTimeSelect.value);
 
     const searchQuery = `${searchTerms} ${includes} ${excludeWords} ${excludeSites}`;

@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (presets[inc].content) return presets[inc].content.join(' ');
       return '';
     }).join(' ');
-    
+
 
     const searchEngines = [
       'www.google.com/search?q=',

@@ -8,6 +8,11 @@
     "include": ["videoFormats", "commons"],
     "hidden": false
   },
+  "gdrive_videos": {
+    "title": "Videos (Google Drive)",
+    "content": ["site:drive.google.com"],
+    "include": ["videoFormats"]
+  },
   "images": {
     "title": "Images",
     "searchTerm": {
@@ -26,6 +31,11 @@
     "include": ["audioFormats", "commons"],
     "hidden": false
   },
+  "gdrive_audio": {
+    "title": "Audio (Google Drive)",
+    "content": ["site:drive.google.com"],
+    "include": ["audioFormats"]
+  },
   "documents": {
     "title": "Documents",
     "searchTerm": {
@@ -34,6 +44,11 @@
     },
     "include": ["documentFormats", "commons"],
     "hidden": false
+  },
+  "gdrive_documents": {
+    "title": "Documents (Google Drive)",
+    "content": ["site:drive.google.com"],
+    "include": ["documentFormats"]
   },
   "executables": {
     "title": "Executables",
@@ -53,15 +68,18 @@
     "include": ["archiveFormats", "commons"],
     "hidden": false
   },
+  "gdrive_archives": {
+    "title": "Archives (Google Drive)",
+    "content": ["site:drive.google.com"],
+    "include": ["archiveFormats"]
+  },
   "videoFormats": {
     "content": ["(avi|mkv|mov|mp4|mpg|wmv)"],
-    "hidden": true,
-    "include": "audioFormats"
+    "hidden": true
   },
   "audioFormats": {
     "content": ["(ac3|flac|m4a|mp3|ogg|wav|wma)"],
-    "hidden": true,
-    "include": "documentFormats"
+    "hidden": true
   },
   "documentFormats": {
     "content": ["(CBZ|CBR|CHM|DOC|DOCX|EPUB|MOBI|ODT|PDF|RTF|txt)"],
@@ -78,26 +96,6 @@
   "archiveFormats": {
     "content": ["(iso|rar|tar|zip|7z)"],
     "hidden": true
-  },
-  "gdrive_videos": {
-    "title": "Videos (Google Drive)",
-    "content": ["site:drive.google.com"],
-    "include": ["videoFormats"]
-  },
-  "gdrive_audio": {
-    "title": "Audio (Google Drive)",
-    "content": ["site:drive.google.com"],
-    "include": ["audioFormats"]
-  },
-  "gdrive_documents": {
-    "title": "Documents (Google Drive)",
-    "content": ["site:drive.google.com"],
-    "include": ["documentFormats"]
-  },
-  "gdrive_archives": {
-    "title": "Archives (Google Drive)",
-    "content": ["site:drive.google.com"],
-    "include": ["archiveFormats"]
   },
   "commons": {
     "content": [

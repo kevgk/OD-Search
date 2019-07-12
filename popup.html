@@ -7,28 +7,37 @@
         <link rel="stylesheet" href="popup.css"/>
     </head>
     <body>
-        <input type="text" autofocus class="search__input" id="searchTermInput" placeholder="Search..."/>
-        <button id="searchButton" class="search__button">⯈</button>
-        <select id="searchTypeSelect" class="search__select"></select>
-        <select id="searchEngineSelect" class="search__select">
-            <option value="google">Google</option>
-            <option value="duckduckgo">DuckDuckGo</option>
-            <option value="startpage">Startpage</option>
+        <div class="container">
+            <div class="searchContainer">
+                <input type="text" autofocus class="search__input" id="searchTermInput" placeholder="Search..."/>
+                <button id="searchButton" class="search__button">⯈</button>
+            </div>
+            <label>Preset</label>
+            <select id="searchTypeSelect" class="search__select"></select>
+            <label>Search on</label>
+            <select id="searchEngineSelect" class="search__select">
+                <option value="google">Google</option>
+                <option value="duckduckgo">DuckDuckGo</option>
+                <option value="startpage">Startpage</option>
                 <option value="searx">Searx</option>
-        </select>
-        <select id="searchTimeSelect" class="search__select">
-            <option value="">all time</option>
-            <option value="h">last hour</option>
-            <option value="d">last day</option>
-            <option value="w">last week</option>
-            <option value="m">last month</option>
-            <option value="y">last year</option>
-        </select>
-        <div class="search__exclude">
-            <input id="excludeWordsInput" type="text" placeholder="Exclude words..."/>
-            <input id="excludeSitesInput" type="text" placeholder="Exclude sites..."/> 
+                <option value="qwant">Qwant</option>
+            </select>
+            <label>Time</label>
+            <select id="searchTimeSelect" class="search__select">
+                <option value="">all time</option>
+                <option value="h">last hour</option>
+                <option value="d">last day</option>
+                <option value="w">last week</option>
+                <option value="m">last month</option>
+                <option value="y">last year</option>
+            </select>
+            <div class="search__exclude">
+                <label>Exclude</label>
+                <input id="excludeWordsInput" type="text" placeholder="Exclude words..."/>
+                <input id="excludeSitesInput" type="text" placeholder="Exclude sites..."/> 
+            </div>
+            <a href="https://github.com/kevgk/OD-Search" class="openSourceLink">OpenSource (Github)</a>
         </div>
-        <a href="https://github.com/kevgk/OD-Search" class="openSourceLink">OpenSource (Github)</a>
         <script src="background.js"></script>
     </body>
 </html>

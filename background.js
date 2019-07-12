@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   searchTypeSelect.innerHTML = Object.keys(presets).map(key => {
     const { hidden, title } = presets[key];
     if (!hidden) return `<option value="${key}">${title}</option>`;
-  });
+  }).join('');
 
   function getIncludes(original) {
     if (!presets[original]) return [];

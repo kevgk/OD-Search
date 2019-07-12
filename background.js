@@ -35,7 +35,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const preset = searchTypeSelect.value;
     const includeNames = getIncludes(preset);
-    const includes = includeNames.map(inc => presets[inc].content.join(' ')).join(' ');
+
+    const includes = includeNames.map(inc => {
+      if (presets[inc].content) return presets[inc].content.join(' ');
+      return '';
+    }).join(' ');
+    
 
     const searchEngines = [
       'www.google.com/search?q=',

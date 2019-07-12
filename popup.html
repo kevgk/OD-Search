@@ -9,19 +9,19 @@
     <body>
         <input type="text" autofocus class="search__input" id="searchTermInput" placeholder="Search..."/>
         <button id="searchButton" class="search__button">⯈</button>
-        <select value="0" id="searchTypeSelect" class="search__select"></select>
-        <select value="0" id="searchTimeSelect" class="search__select">
+        <select id="searchTypeSelect" class="search__select"></select>
+        <select id="searchEngineSelect" class="search__select">
+            <option value="google">Google</option>
+            <option value="duckduckgo">DuckDuckGo</option>
+            <option value="startpage">Startpage</option>
+        </select>
+        <select id="searchTimeSelect" class="search__select">
             <option value="">all time</option>
             <option value="h">last hour</option>
             <option value="d">last day</option>
             <option value="w">last week</option>
             <option value="m">last month</option>
             <option value="y">last year</option>
-        </select>
-        <select id="searchEngineSelect"  class="search__select">
-            <option value="google">Google</option>
-            <option value="duckduckgo">DuckDuckGo</option>
-            <option value="startpage">Startpage</option>
         </select>
         <div class="search__exclude">
             <input id="excludeWordsInput" type="text" placeholder="Exclude words..."/>

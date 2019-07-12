@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     'google': 'www.google.com/search?q=',
     'duckduckgo': 'www.duckduckgo.com/?q=',
     'startpage': 'www.startpage.com/do/search?query=',
-    'searx': 'searx.me/?q=',
-
+    'searx': 'www.searx.me/?q=',
+    'qwant': 'www.lite.qwant.com/?q='
   };
 
   const presets = await loadPresets();

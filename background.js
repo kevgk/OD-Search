@@ -13,19 +13,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   const searchTypeSelect = document.querySelector('#searchTypeSelect');
   const searchTimeSelect = document.querySelector('#searchTimeSelect');
   const searchEngineSelect = document.querySelector('#searchEngineSelect');
-
   const excludeWordsInput = document.querySelector('#excludeWordsInput');
   const excludeSitesInput = document.querySelector('#excludeSitesInput');
   
   searchTypeSelect.innerHTML = generateSearchTypeOptionsHTML();
-
-  function getIncludes(original) {
-    if (!presets[original]) return [];
-    return [].concat(presets[original].include || []).reduce(
-      (r, name) => [...r, ...getIncludes(name)],
-      [original]
-    );
-  }
 
   searchButton.addEventListener('click', search);
   
@@ -72,6 +63,14 @@ document.addEventListener('DOMContentLoaded', async () => {
       });
     }
     return presets;
+  }
+
+  function getIncludes(original) {
+    if (!presets[original]) return [];
+    return [].concat(presets[original].include || []).reduce(
+      (r, name) => [...r, ...getIncludes(name)],
+      [original]
+    );
   }
 
   function getTimeParameter (value) {

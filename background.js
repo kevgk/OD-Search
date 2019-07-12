@@ -1,13 +1,5 @@
 document.addEventListener('DOMContentLoaded', async () => {
 
-  const searchEngines = {
-    'google': 'www.google.com/search?q=',
-    'duckduckgo': 'www.duckduckgo.com/?q=',
-    'startpage': 'www.startpage.com/do/search?query='
-  };
-
-  const presets = await loadPresets();
-
   const searchTermInput = document.querySelector('#searchTermInput');
   const searchButton = document.querySelector('#searchButton');
   const searchTypeSelect = document.querySelector('#searchTypeSelect');
@@ -15,6 +7,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   const searchEngineSelect = document.querySelector('#searchEngineSelect');
   const excludeWordsInput = document.querySelector('#excludeWordsInput');
   const excludeSitesInput = document.querySelector('#excludeSitesInput');
+
+  const searchEngines = {
+    'google': 'www.google.com/search?q=',
+    'duckduckgo': 'www.duckduckgo.com/?q=',
+    'startpage': 'www.startpage.com/do/search?query='
+  };
+
+  const presets = await loadPresets();
   
   searchTypeSelect.innerHTML = generateSearchTypeOptionsHTML();
 
@@ -27,25 +27,30 @@ document.addEventListener('DOMContentLoaded', async () => {
   function search() {
     if (!searchTermInput.value) return;
 
-    const preset = searchTypeSelect.value;
-    const includeNames = getPresetIncludes(preset);
-
-    const includes = getContentFromIncludes(includeNames);
-
-    const { prepend = '', append = '' } = preset.searchTerm || {};
-    const searchTerms = searchTermInput.value.split(',').map(term => `${prepend}${term.trim()}${append}`).join(' ');
-    const excludeWords = excludeWordsInput.value.length > 0 ? excludeWordsInput.value.split(',').map(word => `-intext:"${word}"`).join(' ') : '';
-    const excludeSites = excludeSitesInput.value.length > 0 ? excludeSitesInput.value.split(',').map(site => `-site:"${site}"`).join(' ') : '';
-    const timeParam = getTimeParameter(searchTimeSelect.value);
-
-    const searchQuery = `${searchTerms} ${includes} ${excludeWords} ${excludeSites}`;
-
-    const url = `https://${searchEngines[searchEngineSelect.value]}${encodeURIComponent(searchQuery)}${timeParam}`;
+    const url = buildQuery();
 
     browser.tabs.create({
       url,
       active: true
     });
+  }
+
+  function buildQuery () {
+    const preset = searchTypeSelect.value;
+    const includeNames = getPresetIncludes(preset);
+    const includes = getContentFromIncludes(includeNames);
+
+    const { prepend = '', append = '' } = preset.searchTerm || {};
+    const searchTerms = searchTermInput.value.split(',').map(term => `${prepend}${term.trim()}${append}`).join(' ');
+
+    const excludeWords = makeParamWithOrList('-insite', excludeWordsInput.value);
+    const excludeSites = makeParamWithOrList('-inurl', excludeSitesInput.value);
+
+    const timeParam = getTimeParameter(searchTimeSelect.value);
+
+    const searchQuery = `${searchTerms} ${includes} ${excludeWords} ${excludeSites}`;
+
+    return `https://${searchEngines[searchEngineSelect.value]}${encodeURIComponent(searchQuery)}${timeParam}`;
   }
 
   async function loadPresets () {
@@ -71,21 +76,30 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   function getContentFromIncludes (includes) {
-    return includes.map(inc => {
-      if (presets[inc].content) return presets[inc].content.join(' ');
-      return '';
-    }).join(' ');
+    const contents = includes.map(incName => {
+      return presets[incName].content ? presets[incName].content.join(' ') : '';
+    });
+    return contents.join(' ');
   }
 
-  function getTimeParameter (value) {
-    const timeParams = ['', 'h', 'd', 'w', 'm', 'y'];
-    return value ? `&tbs=qdr:${timeParams[value]}` : '';
+  function makeParamWithOrList (name, values) {
+    if (!values.length) return '';
+
+    values = values.replace(/\s*,\s*/g, '|');
+    return `${name}:(${values})`;
+  }
+
+  function getTimeParameter (value = '') {
+    return `&tbs=qdr:${value}`;
   }
 
   function generateSearchTypeOptionsHTML () {
-    return Object.keys(presets).map(key => {
+    const presetNames = Object.keys(presets);
+    const options = presetNames.map(key => {
       const { hidden, title } = presets[key];
       if (!hidden) return `<option value="${key}">${title}</option>`;
-    }).join('');
+    });
+    
+    return options.join(' ');
   }
 });

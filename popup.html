@@ -2,6 +2,8 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="popup.css"/>
     </head>
     <body>
@@ -9,12 +11,12 @@
         <button id="searchButton" class="search__button">⯈</button>
         <select value="0" id="searchTypeSelect" class="search__select"></select>
         <select value="0" id="searchTimeSelect" class="search__select">
-            <option value="0">all time</option>
-            <option value="1">last hour</option>
-            <option value="2">last 24 hours</option>
-            <option value="3">last week</option>
-            <option value="4">last month</option>
-            <option value="5">last year</option>
+            <option value="">all time</option>
+            <option value="h">last hour</option>
+            <option value="d">last day</option>
+            <option value="w">last week</option>
+            <option value="m">last month</option>
+            <option value="y">last year</option>
         </select>
         <select id="searchEngineSelect"  class="search__select">
             <option value="google">Google</option>

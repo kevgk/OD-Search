@@ -2,8 +2,30 @@
     box-sizing: border-box;
 }
 
+
 html, body {
-    width: 250px;
+    width: 300px;
+    font-family: sans-serif;
+    display: flex;
+    align-items: center;
+}
+
+label {
+    font-size: 12px;
+    padding: 8px 0;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0 auto;
+    padding: 5px;
+}
+
+.searchContainer {
+    display: flex;
+    width: 100%;
 }
 
 .search__input,
@@ -12,11 +34,10 @@ html, body {
 }
 
 .search__input {
-    display: inline-block;
-    width: 210px;
     background-color: #fff;
     outline: none;
     border: 1px solid #ccc;
+    flex-grow: 1;
 }
 
 input, select, button {
@@ -25,23 +46,19 @@ input, select, button {
 }
 
 .search__button {
-    position: absolute;
-    right: 10px;
-    display: inline-block;
-    width: 30px;
     color: #fff;
     border: none;
     background-color: limegreen;
     text-align: center;
+    width: 30px;
 }
 
+.search__select,
+.search__exclude,
 .search__exclude > input {
     width: 100%;
 }
 
-.search__select {
-    width: 100%;
-}
 
 .openSourceLink {
     width: 100%;
@@ -49,6 +66,5 @@ input, select, button {
     display: block;
     font-size: 10px;
     text-decoration: none;
-    font-family: sans-serif;
     color: #000;
 }

@@ -30,10 +30,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const preset = searchTypeSelect.value;
     const includeNames = getPresetIncludes(preset);
 
-    const includes = includeNames.map(inc => {
-      if (presets[inc].content) return presets[inc].content.join(' ');
-      return '';
-    }).join(' ');
+    const includes = getContentFromIncludes(includeNames);
 
     const { prepend = '', append = '' } = preset.searchTerm || {};
     const searchTerms = searchTermInput.value.split(',').map(term => `${prepend}${term.trim()}${append}`).join(' ');
@@ -71,6 +68,13 @@ document.addEventListener('DOMContentLoaded', async () => {
       (r, name) => [...r, ...getPresetIncludes(name)],
       [original]
     );
+  }
+
+  function getContentFromIncludes (includes) {
+    return includes.map(inc => {
+      if (presets[inc].content) return presets[inc].content.join(' ');
+      return '';
+    }).join(' ');
   }
 
   function getTimeParameter (value) {

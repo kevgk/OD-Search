@@ -17,10 +17,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const excludeWordsInput = document.querySelector('#excludeWordsInput');
   const excludeSitesInput = document.querySelector('#excludeSitesInput');
   
-  searchTypeSelect.innerHTML = Object.keys(presets).map(key => {
-    const { hidden, title } = presets[key];
-    if (!hidden) return `<option value="${key}">${title}</option>`;
-  }).join('');
+  searchTypeSelect.innerHTML = generateSearchTypeOptionsHTML();
 
   function getIncludes(original) {
     if (!presets[original]) return [];
@@ -87,5 +84,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   function getTimeParameter (value) {
     const timeParams = ['', 'h', 'd', 'w', 'm', 'y'];
     return value ? `&tbs=qdr:${timeParams[value]}` : '';
+  }
+
+  function generateSearchTypeOptionsHTML () {
+    return Object.keys(presets).map(key => {
+      const { hidden, title } = presets[key];
+      if (!hidden) return `<option value="${key}">${title}</option>`;
+    }).join('');
   }
 });

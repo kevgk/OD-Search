@@ -1,5 +1,11 @@
 document.addEventListener('DOMContentLoaded', async () => {
 
+  const searchEngines = {
+    'google': 'www.google.com/search?q=',
+    'duckduckgo': 'www.duckduckgo.com/?q=',
+    'startpage': 'www.startpage.com/do/search?query='
+  };
+
   const presets = await loadPresets();
 
   const searchTermInput = document.querySelector('#searchTermInput');

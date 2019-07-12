@@ -1,50 +1,4 @@
 {
-  "videoFormats": {
-    "content": ["(avi|mkv|mov|mp4|mpg|wmv)"],
-    "hidden": true,
-    "include": "audioFormats"
-  },
-  "audioFormats": {
-    "content": ["(ac3|flac|m4a|mp3|ogg|wav|wma)"],
-    "hidden": true,
-    "include": "documentFormats"
-  },
-  "documentFormats": {
-    "content": ["(CBZ|CBR|CHM|DOC|DOCX|EPUB|MOBI|ODT|PDF|RTF|txt)"],
-    "hidden": true
-  },
-  "imageFormats": {
-    "content": ["(bmp|gif|jpg|jpeg|png|psd|tif|tiff)"],
-    "hidden": true
-  },
-  "executableFormats": {
-    "content": ["(exe|apk)"],
-    "hidden": true
-  },
-  "archiveFormats": {
-    "content": ["(iso|rar|tar|zip|7z)"],
-    "hidden": true
-  },
-  "gdrive_videos": {
-    "title": "Google Drive Videos",
-    "content": ["site:drive.google.com"],
-    "include": ["videoFormats"]
-  },
-  "gdrive_audio": {
-    "title": "Google Drive Audio",
-    "content": ["site:drive.google.com"],
-    "include": ["audioFormats"]
-  },
-  "gdrive_documents": {
-    "title": "Google Drive Documents",
-    "content": ["site:drive.google.com"],
-    "include": ["documentFormats"]
-  },
-  "gdrive_archives": {
-    "title": "Google Drive Archives",
-    "content": ["site:drive.google.com"],
-    "include": ["archiveFormats"]
-  },
   "videos": {
     "title": "Videos",
     "searchTerm": {
@@ -98,6 +52,52 @@
     },
     "include": ["archiveFormats", "commons"],
     "hidden": false
+  },
+  "videoFormats": {
+    "content": ["(avi|mkv|mov|mp4|mpg|wmv)"],
+    "hidden": true,
+    "include": "audioFormats"
+  },
+  "audioFormats": {
+    "content": ["(ac3|flac|m4a|mp3|ogg|wav|wma)"],
+    "hidden": true,
+    "include": "documentFormats"
+  },
+  "documentFormats": {
+    "content": ["(CBZ|CBR|CHM|DOC|DOCX|EPUB|MOBI|ODT|PDF|RTF|txt)"],
+    "hidden": true
+  },
+  "imageFormats": {
+    "content": ["(bmp|gif|jpg|jpeg|png|psd|tif|tiff)"],
+    "hidden": true
+  },
+  "executableFormats": {
+    "content": ["(exe|apk)"],
+    "hidden": true
+  },
+  "archiveFormats": {
+    "content": ["(iso|rar|tar|zip|7z)"],
+    "hidden": true
+  },
+  "gdrive_videos": {
+    "title": "Videos (Google Drive)",
+    "content": ["site:drive.google.com"],
+    "include": ["videoFormats"]
+  },
+  "gdrive_audio": {
+    "title": "Audio (Google Drive)",
+    "content": ["site:drive.google.com"],
+    "include": ["audioFormats"]
+  },
+  "gdrive_documents": {
+    "title": "Documents (Google Drive)",
+    "content": ["site:drive.google.com"],
+    "include": ["documentFormats"]
+  },
+  "gdrive_archives": {
+    "title": "Archives (Google Drive)",
+    "content": ["site:drive.google.com"],
+    "include": ["archiveFormats"]
   },
   "commons": {
     "content": [

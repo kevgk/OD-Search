@@ -9,12 +9,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   const excludeSitesInput = document.querySelector('#excludeSitesInput');
 
   const searchEngines = {
-    'google': 'www.google.com/search?q=',
-    'duckduckgo': 'www.duckduckgo.com/?q=',
-    'startpage': 'www.startpage.com/do/search?query=',
-    'searx': 'www.searx.me/?q=',
-    'qwant': 'www.lite.qwant.com/?q='
+    'Google': 'www.google.com/search?q=',
+    'DuckDuckGo': 'www.duckduckgo.com/?q=',
+    'Startpage': 'www.startpage.com/do/search?query=',
+    'Searx': 'www.searx.me/?q=',
+    'Qwant': 'www.lite.qwant.com/?q='
   };
+
+  searchEngineSelect.innerHTML = await generateSearchEngineOptionsHTML();
 
   const presets = await loadPresets();
   
@@ -26,10 +28,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (e.which === 13) search();
   });
 
-  function search() {
+  async function search() {
     if (!searchTermInput.value) return;
 
-    const url = buildQuery();
+    const url = await buildQuery();
 
     browser.tabs.create({
       url,
@@ -37,7 +39,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
-  function buildQuery () {
+  async function buildQuery () {
     const preset = searchTypeSelect.value;
     const includeNames = getPresetIncludes(preset);
     const includes = getContentFromIncludes(includeNames);
@@ -51,6 +53,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const timeParam = getTimeParameter(searchTimeSelect.value);
 
     const searchQuery = `${searchTerms} ${includes} ${excludeWords} ${excludeSites}`;
+
+    await saveSearchEngine(searchEngineSelect.value);
 
     return `https://${searchEngines[searchEngineSelect.value]}${encodeURIComponent(searchQuery)}${timeParam}`;
   }
@@ -103,5 +107,23 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
     
     return options.join(' ');
+  }
+
+  async function generateSearchEngineOptionsHTML () {
+    const { searchEngine } = await browser.storage.sync.get("searchEngine");
+
+    const searchEngineNames = Object.keys(searchEngines);
+    const options = searchEngineNames.map(engine => {
+      const selected = engine === searchEngine ? 'selected' : '';
+      return `<option ${selected} value="${engine}">${engine}</option>`;
+    });
+
+    return options.join('');
+  }
+
+  async function saveSearchEngine (searchEngine) {
+    await browser.storage.sync.set({
+      searchEngine
+    });
   }
 });

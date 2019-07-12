@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (!searchTermInput.value) return;
 
     const preset = searchTypeSelect.value;
-    const includeNames = getIncludes(preset);
+    const includeNames = getPresetIncludes(preset);
 
     const includes = includeNames.map(inc => {
       if (presets[inc].content) return presets[inc].content.join(' ');
@@ -65,10 +65,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     return presets;
   }
 
-  function getIncludes(original) {
+  function getPresetIncludes(original) {
     if (!presets[original]) return [];
     return [].concat(presets[original].include || []).reduce(
-      (r, name) => [...r, ...getIncludes(name)],
+      (r, name) => [...r, ...getPresetIncludes(name)],
       [original]
     );
   }

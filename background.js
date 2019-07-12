@@ -44,13 +44,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       return '';
     }).join(' ');
 
-
-    const searchEngines = [
-      'www.google.com/search?q=',
-      'www.duckduckgo.com/?q=',
-      'www.startpage.com/do/search?query='
-    ];
-
     const { prepend = '', append = '' } = preset.searchTerm || {};
     const searchTerms = searchTermInput.value.split(',').map(term => `${prepend}${term.trim()}${append}`).join(' ');
     const excludeWords = excludeWordsInput.value.length > 0 ? excludeWordsInput.value.split(',').map(word => `-intext:"${word}"`).join(' ') : '';

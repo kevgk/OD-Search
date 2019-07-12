@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const searchQuery = `${searchTerms} ${includes} ${excludeWords} ${excludeSites}`;
 
-    const url = `https:${searchEngines[searchEngineSelect.value]}${encodeURIComponent(searchQuery)}${timeParam}`;
+    const url = `https://${searchEngines[searchEngineSelect.value]}${encodeURIComponent(searchQuery)}${timeParam}`;
 
     browser.tabs.create({
       url,

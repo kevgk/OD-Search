@@ -48,9 +48,23 @@ input, select, button {
 .search__button {
     color: #fff;
     border: none;
-    background-color: limegreen;
+    background-color: #5e92f3;
     text-align: center;
-    width: 30px;
+    width: 50%;
+    cursor: pointer;
+    transition: background-color .3s;
+}
+
+.search__button:hover {
+    background-color: #003c8f;
+}
+
+.secondary {
+    background-color: #5472d3;
+}
+
+.secondary:hover {
+    background-color: #002171;
 }
 
 .search__select,

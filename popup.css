@@ -37,7 +37,7 @@ label {
     background-color: #fff;
     outline: none;
     border: 1px solid #ccc;
-    flex-grow: 1;
+    width: 100%;
 }
 
 input, select, button {

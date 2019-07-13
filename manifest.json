@@ -11,8 +11,10 @@
   "options_ui": {
     "page": "options.html"
   },
-
-  "permissions": ["storage", "clipboardWrite"],
+  "permissions": [
+    "storage",
+    "clipboardWrite"
+  ],
 
   "applications": {
     "gecko": {

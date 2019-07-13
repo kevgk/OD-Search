@@ -56,21 +56,19 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   async function buildQuery () {
-    const preset = searchTypeSelect.value;
-    const includeNames = getPresetIncludes(preset);
+    const presetName = searchTypeSelect.value;
+    const includeNames = getPresetIncludes(presetName);
     const includes = getContentFromIncludes(includeNames);
 
-    const { prepend = '', append = '' } = preset.searchTerm || {};
+    const { prepend = '', append = '' } = presets[presetName].searchTerm || {};
     const searchTerms = searchTermInput.value.split(',').map(term => `${prepend}${term.trim()}${append}`).join(' ');
 
     const excludeWords = makeParamWithOrList('-insite', excludeWordsInput.value);
     const excludeSites = makeParamWithOrList('-inurl', excludeSitesInput.value);
 
-    const searchQuery = `${searchTerms} ${includes} ${excludeWords} ${excludeSites}`;
-
     await saveSearchEngine(searchEngineSelect.value);
 
-    return searchQuery;
+    return `${searchTerms} ${includes} ${excludeWords} ${excludeSites}`;
   }
 
   function buildURL (searchEngine, query, timespan) {

@@ -23,11 +23,6 @@ label {
     padding: 5px;
 }
 
-.searchContainer {
-    display: flex;
-    width: 100%;
-}
-
 .search__input,
 .search__button {
     padding: 5px 10px;

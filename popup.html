@@ -8,11 +8,9 @@
     </head>
     <body>
         <div class="container">
-            <div class="searchContainer">
-                <input type="text" autofocus class="search__input" id="searchTermInput" placeholder="Search..."/>
-                <button id="searchButton" class="search__button">⯈</button>
-                <button id="copyButton" class="search__button">c</button>
-            </div>
+            <input type="text" autofocus class="search__input" id="searchTermInput" placeholder="Search..."/>
+            <button id="searchButton" class="search__button">search</button>
+            <button id="copyButton" class="search__button secondary">copy query</button>
             <label>Preset</label>
             <select id="searchTypeSelect" class="search__select"></select>
             <label>Search on</label>
@@ -31,7 +29,7 @@
                 <input id="excludeWordsInput" type="text" placeholder="Exclude words..."/>
                 <input id="excludeSitesInput" type="text" placeholder="Exclude sites..."/> 
             </div>
-            <a href="https://github.com/kevgk/OD-Search" class="openSourceLink">OpenSource (Github)</a>
+            <a href="https://github.com/kevgk/OD-Search" class="footer">OpenSource (Github)</a>
         </div>
         <script src="background.js"></script>
     </body>

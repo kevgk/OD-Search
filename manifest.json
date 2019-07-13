@@ -12,7 +12,7 @@
     "page": "options.html"
   },
 
-  "permissions": ["storage"],
+  "permissions": ["storage", "clipboardWrite"],
 
   "applications": {
     "gecko": {

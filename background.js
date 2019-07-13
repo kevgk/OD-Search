@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   const searchTypeSelect = document.querySelector('#searchTypeSelect');
   const searchTimeSelect = document.querySelector('#searchTimeSelect');
   const searchEngineSelect = document.querySelector('#searchEngineSelect');
+  const copyButton = document.querySelector('#copyButton');
+  const copyInput = document.querySelector('#copyInput');
   const excludeWordsInput = document.querySelector('#excludeWordsInput');
   const excludeSitesInput = document.querySelector('#excludeSitesInput');
 
@@ -23,6 +25,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   searchTypeSelect.innerHTML = generateSearchTypeOptionsHTML();
 
   searchButton.addEventListener('click', search);
+  copyButton.addEventListener('click', copyQuery);
   
   document.addEventListener('keyup', e => {
     if (e.which === 13) search();
@@ -31,12 +34,25 @@ document.addEventListener('DOMContentLoaded', async () => {
   async function search() {
     if (!searchTermInput.value) return;
 
-    const url = await buildQuery();
+    const query = await buildQuery();
+
+    const timespan = getTimeParameter(searchTimeSelect.value);
+
+    const searchEngine = searchEngines[searchEngineSelect.value];
+
+    const url = buildURL(searchEngine, query, timespan);
 
     browser.tabs.create({
       url,
       active: true
     });
+  }
+
+  async function copyQuery () {
+    if (!searchTermInput.value) return;
+
+    const query = await buildQuery();
+    await navigator.clipboard.writeText(query);
   }
 
   async function buildQuery () {
@@ -50,13 +66,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     const excludeWords = makeParamWithOrList('-insite', excludeWordsInput.value);
     const excludeSites = makeParamWithOrList('-inurl', excludeSitesInput.value);
 
-    const timeParam = getTimeParameter(searchTimeSelect.value);
-
     const searchQuery = `${searchTerms} ${includes} ${excludeWords} ${excludeSites}`;
 
     await saveSearchEngine(searchEngineSelect.value);
 
-    return `https://${searchEngines[searchEngineSelect.value]}${encodeURIComponent(searchQuery)}${timeParam}`;
+    return searchQuery;
+  }
+
+  function buildURL (searchEngine, query, timespan) {
+    return `https://${searchEngine}${encodeURIComponent(query)}${timespan}`;
   }
 
   async function loadPresets () {

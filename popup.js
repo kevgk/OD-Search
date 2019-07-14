@@ -135,11 +135,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   async function generateSearchEngineOptionsHTML () {
     let searchEngine;
-    if (chrome) {
+    if (chrome instanceof Object) {
       searchEngine = chrome.storage.sync.get('searchEngine', data => data);
     } else {
-      searchEngine.searchEngine = await browser.storage.sync.get('searchEngine');
+      searchEngine = await browser.storage.sync.get('searchEngine');
     }
+
+    searchEngine = searchEngine;
 
     const searchEngineNames = Object.keys(searchEngines);
     const options = searchEngineNames.map(engine => {
@@ -151,7 +153,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   async function saveSearchEngine (searchEngine) {
-    if (chrome) {
+    if (chrome instanceof Object) {
       chrome.storage.sync.set({ searchEngine });
     } else {
       await browser.storage.sync.set({ searchEngine });

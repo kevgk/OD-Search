@@ -1,4 +1,4 @@
-# Product Name
+# OD-Search
 > Find files on the Internet.
 
 OD-Search builds search queries, to find files on the Internet. Just select a preset (eg. videos, documents, audiofiles, ...) enter a searchterm and go.

@@ -22,6 +22,16 @@
     "include": ["imageFormats", "commons"],
     "hidden": false
   },
+  "gdrive_images": {
+    "title": "Images (Google Drive)",
+    "content": ["site:drive.google.com"],
+    "include": ["imageFormats"]
+  },
+  "imagesWpUploads": {
+    "title": "Images (wp_uploads)",
+    "content": ["inurl:\"/wp-content/uploads/\""],
+    "include": ["imageFormats", "commons"]
+  },
   "audio": {
     "title": "Audio",
     "searchTerm": {
@@ -49,6 +59,11 @@
     "title": "Documents (Google Drive)",
     "content": ["site:drive.google.com"],
     "include": ["documentFormats"]
+  },
+  "documentsWpUploads": {
+    "title": "Documents (wp_uploads)",
+    "content": ["inurl:\"/wp-content/uploads/\""],
+    "include": ["documentFormats", "commons"]
   },
   "executables": {
     "title": "Executables",

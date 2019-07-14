@@ -13,8 +13,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     'Google': 'www.google.com/search?q=',
     'DuckDuckGo': 'www.duckduckgo.com/?q=',
     'Startpage': 'www.startpage.com/do/search?query=',
-    'Searx': 'www.searx.me/?q=',
-    'Qwant': 'www.lite.qwant.com/?q='
+    'Searx': 'www.searx.me/?q='
   };
 
   searchEngineSelect.innerHTML = await generateSearchEngineOptionsHTML();

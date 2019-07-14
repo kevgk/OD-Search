@@ -16,11 +16,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     'Searx': 'www.searx.me/?q='
   };
 
-  searchEngineSelect.innerHTML = await generateSearchEngineOptionsHTML();
+  searchEngineSelect.innerHTML = String(await generateSearchEngineOptionsHTML());
 
   const presets = await loadPresets();
   
-  searchTypeSelect.innerHTML = generateSearchTypeOptionsHTML();
+  searchTypeSelect.innerHTML = String(generateSearchTypeOptionsHTML());
 
   searchButton.addEventListener('click', search);
   copyButton.addEventListener('click', copyQuery);

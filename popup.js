@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       presets = await browser.storage.sync.get('presets');
     }
 
-    if (!presets) {
+    if (!presets || true) {
       const data = await fetch('/presets.json');
       presets = await data.json();
 

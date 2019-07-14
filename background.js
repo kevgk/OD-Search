@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const searchTimeSelect = document.querySelector('#searchTimeSelect');
   const searchEngineSelect = document.querySelector('#searchEngineSelect');
   const copyButton = document.querySelector('#copyButton');
-  const copyInput = document.querySelector('#copyInput');
   const excludeWordsInput = document.querySelector('#excludeWordsInput');
   const excludeSitesInput = document.querySelector('#excludeSitesInput');
 
@@ -42,7 +41,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const url = buildURL(searchEngine, query, timespan);
 
-    browser.tabs.create({
+    const vendor = chrome || browser;
+
+    vendor.tabs.create({
       url,
       active: true
     });
@@ -76,15 +77,22 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   async function loadPresets () {
-    let { presets } = await browser.storage.sync.get("presets");
+    let presets;
+    if (chrome) {
+      presets = chrome.storage.sync.get('presets', data => data.presets);
+    } else {
+      presets = await browser.storage.sync.get('presets');
+    }
 
     if (!presets) {
       const data = await fetch('/presets.json');
       presets = await data.json();
 
-      await browser.storage.sync.set({
-        presets
-      });
+      if (chrome) {
+        chrome.storage.sync.set({ presets });  
+      } else {
+        await browser.storage.sync.set({ presets });
+      }
     }
     return presets;
   }
@@ -126,7 +134,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   async function generateSearchEngineOptionsHTML () {
-    const { searchEngine } = await browser.storage.sync.get("searchEngine");
+    let searchEngine;
+    if (chrome) {
+      searchEngine = chrome.storage.sync.get('searchEngine', data => data);
+    } else {
+      searchEngine.searchEngine = await browser.storage.sync.get('searchEngine');
+    }
 
     const searchEngineNames = Object.keys(searchEngines);
     const options = searchEngineNames.map(engine => {
@@ -138,8 +151,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   async function saveSearchEngine (searchEngine) {
-    await browser.storage.sync.set({
-      searchEngine
-    });
+    if (chrome) {
+      chrome.storage.sync.set({ searchEngine });
+    } else {
+      await browser.storage.sync.set({ searchEngine });
+    }
   }
 });

@@ -12,10 +12,9 @@
     "storage",
     "clipboardWrite"
   ],
-
   "applications": {
     "gecko": {
-      "id": "ODSearch@kevgk"
+      "id": "{bda7d743-06f5-4628-bcf7-7a847293a0b3}"
     }
   }
 }

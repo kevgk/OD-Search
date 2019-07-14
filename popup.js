@@ -40,9 +40,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const url = buildURL(searchEngine, query, timespan);
 
-    const vendor = chrome || browser;
-
-    vendor.tabs.create({
+    browser.tabs.create({
       url,
       active: true
     });
@@ -76,22 +74,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   async function loadPresets () {
-    let presets;
-    if (chrome) {
-      presets = chrome.storage.sync.get('presets', data => data.presets);
-    } else {
-      presets = await browser.storage.sync.get('presets');
-    }
+    let { presets } = await browser.storage.sync.get('presets');
 
-    if (!presets || true) {
+    if (true || !presets) {
       const data = await fetch('/presets.json');
       presets = await data.json();
 
-      if (chrome) {
-        chrome.storage.sync.set({ presets });  
-      } else {
-        await browser.storage.sync.set({ presets });
-      }
+      await browser.storage.sync.set({ presets });
     }
     return presets;
   }
@@ -133,14 +122,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   async function generateSearchEngineOptionsHTML () {
-    let searchEngine;
-    if (chrome instanceof Object) {
-      searchEngine = chrome.storage.sync.get('searchEngine', data => data);
-    } else {
-      searchEngine = await browser.storage.sync.get('searchEngine');
-    }
-
-    searchEngine = searchEngine;
+    const { searchEngine } = await browser.storage.sync.get('searchEngine');
 
     const searchEngineNames = Object.keys(searchEngines);
     const options = searchEngineNames.map(engine => {
@@ -152,10 +134,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   async function saveSearchEngine (searchEngine) {
-    if (chrome instanceof Object) {
-      chrome.storage.sync.set({ searchEngine });
-    } else {
-      await browser.storage.sync.set({ searchEngine });
-    }
+    await browser.storage.sync.set({ searchEngine });
   }
 });

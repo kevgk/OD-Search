@@ -8,9 +8,6 @@
     "default_icon": "magnify.png",
     "default_popup": "popup.html"
   },
-  "options_ui": {
-    "page": "options.html"
-  },
   "permissions": [
     "storage",
     "clipboardWrite"

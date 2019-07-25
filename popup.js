@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const searchEngines = {
     'Google': 'www.google.com/search?q=',
     'DuckDuckGo': 'www.duckduckgo.com/?q=',
+    'DuckDuckGo (nojs)': 'www.duckduckgo.com/html?q=',
     'Startpage': 'www.startpage.com/do/search?query=',
     'Searx': 'www.searx.me/?q='
   };

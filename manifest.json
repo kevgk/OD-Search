@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "OD-Search",
-  "version": "1.1",
+  "version": "1.2",
   "description": "Web Extension that builds search queries.",
   "browser_action": {
     "default_title": "OD-Search",

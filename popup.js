@@ -10,11 +10,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   const excludeSitesInput = document.querySelector('#excludeSitesInput');
 
   const searchEngines = {
-    'Google': 'www.google.com/search?q=',
-    'DuckDuckGo': 'www.duckduckgo.com/?q=',
-    'DuckDuckGo (nojs)': 'www.duckduckgo.com/html?q=',
-    'Startpage': 'www.startpage.com/do/search?query=',
-    'Searx': 'www.searx.me/?q='
+    'Google': 'google.com/search?q=',
+    'DuckDuckGo': 'duckduckgo.com/?q=',
+    'DuckDuckGo (nojs)': 'duckduckgo.com/html?q=',
+    'Startpage': 'startpage.com/do/search?query=',
+    'Searx': 'searx.me/?q=',
+    'metager': 'metager.de/meta/meta.ger3?eingabe='
   };
 
   searchEngineSelect.innerHTML = String(await generateSearchEngineOptionsHTML());

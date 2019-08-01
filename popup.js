@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const includes = getContentFromIncludes(includeNames);
 
     const { prepend = '', append = '' } = presets[presetName].searchTerm || {};
-    const searchTerms = searchTermInput.value.split(',').map(term => `${prepend}${term.trim()}${append}`).join(' ');
+    const searchTerms = searchTermInput.value.split(' ').map(term => `${prepend}${term.trim()}${append}`).join('.');
 
     const excludeWords = makeParamWithOrList('-insite', excludeWordsInput.value);
     const excludeSites = makeParamWithOrList('-inurl', excludeSitesInput.value);

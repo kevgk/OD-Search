@@ -1,10 +1,6 @@
 {
   "videos": {
     "title": "Videos",
-    "searchTerm": {
-      "prepend": "\"intext:",
-      "append": "\""
-    },
     "include": ["videoFormats", "commons"],
     "hidden": false
   },
@@ -16,8 +12,8 @@
   "images": {
     "title": "Images",
     "searchTerm": {
-      "prepend": "\"intext:",
-      "append": "\""
+      "prepend": "",
+      "append": ""
     },
     "include": ["imageFormats", "commons"],
     "hidden": false
@@ -34,10 +30,6 @@
   },
   "audio": {
     "title": "Audio",
-    "searchTerm": {
-      "prepend": "\"intext:",
-      "append": "\""
-    },
     "include": ["audioFormats", "commons"],
     "hidden": false
   },
@@ -48,10 +40,6 @@
   },
   "documents": {
     "title": "Documents",
-    "searchTerm": {
-      "prepend": "\"intext:",
-      "append": "\""
-    },
     "include": ["documentFormats", "commons"],
     "hidden": false
   },
@@ -67,19 +55,11 @@
   },
   "executables": {
     "title": "Executables",
-    "searchTerm": {
-      "prepend": "\"intext:",
-      "append": "\""
-    },
     "include": ["executableFormats", "commons"],
     "hidden": false
   },
   "archives": {
     "title": "Archives",
-    "searchTerm": {
-      "prepend": "\"intext:",
-      "append": "\""
-    },
     "include": ["archiveFormats", "commons"],
     "hidden": false
   },
